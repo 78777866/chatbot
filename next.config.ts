@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async redirects() {
+    return [];
+  },
   images: {
     remotePatterns: [
       {
@@ -16,9 +19,16 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
-  },
-  experimental: {
-    optimizeFonts: false
+    domains: ['localhost'],  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(ico|png|jpg|jpeg|gif|svg)$/,
+      type: 'asset/resource',
+      generator: {
+        filename: 'static/media/[name][ext]'
+      }
+    });
+    return config;
   }
 };
 

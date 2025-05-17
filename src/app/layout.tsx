@@ -1,28 +1,24 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
-import { Toaster } from "@/components/ui/toaster";
+import type { Metadata } from 'next';
 import { AuthProvider } from '@/hooks/useAuth';
-import { useAntiInspection } from '@/hooks/useAntiInspection';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'CyberChat AI',
-  description: 'Futuristic AI Chat Application',
+  title: 'Chatbot',
+  description: 'AI-powered chatbot application',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} antialiased font-sans`}>
+    <html lang="en">
+      <body>
         <AuthProvider>
           {children}
           <Toaster />
